@@ -62,26 +62,6 @@ git checkout lesson-0
 yarn init
 ```
 
-### `package.json`のmainを`index.js`から`webpack.config.js`に変更する
-
-``` JSON
-  "main": "webpack.config.js",
-```
-
-``` JSON
-  "license": "MIT"
-}
-
---------↓↓↓↓追加↓↓↓↓--------
-,"scripts": {
-    "build": "webpack --mode development",
-    "start": "webpack-dev-server --open"
-  }
---------↑↑↑↑追加↑↑↑↑--------
-
-}
-```
-
 ### パッケージインストール
 
 ```shell
@@ -133,6 +113,28 @@ import React from 'react';
 
 export default function App() {
     return (<h1>Welcome!</h1>);
+}
+```
+
+### `package.json`のmainを`index.js`から`webpack.config.js`に変更する
+
+``` JSON
+  "main": "webpack.config.js",
+```
+
+``` JSON
+  "license": "MIT"
+}
+
+### `package.json`にscriptsを追加する
+
+--------↓↓↓↓追加↓↓↓↓--------
+,"scripts": {
+    "build": "webpack --mode development",
+    "start": "webpack-dev-server --open"
+  }
+--------↑↑↑↑追加↑↑↑↑--------
+
 }
 ```
 
