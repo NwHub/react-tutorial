@@ -2,3 +2,4 @@
 /dist
 .firebase
 yarn-error.log*
+.DS_store

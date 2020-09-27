@@ -14,6 +14,8 @@ Macは`Homebrew`、Windowsは`Scoop`がオススメ
 
 - Mac
   - [MacにNode.jsをインストール](https://qiita.com/kyosuke5_20/items/c5f68fc9d89b84c0df09)
+  - Macの場合はXcodeの`Command Line Tools`をインストールする必要があり、`Homebrew`入れる途中でいい感じにインストールされたが、最近できないとの報告あり。
+  - Apple Developersで直接ダウンロードする必要があるかも、[Apple Developers](https://qiita.com/mochiflappe/items/b6ecbe9d9a3a37cebbab)
 
 - Windows
   - [windows10 scoopを使ってnode.jsをインストールする](https://mebee.info/2020/04/20/post-10056/)
@@ -72,7 +74,7 @@ yarn add -D @babel/core @babel/preset-env @babel/preset-react babel-loader css-l
 ### フォルダとファイルの作成
 
 ```shell
-mkdir -p src/asset/index.html
+mkdir -p src/asset
 ```
 
 ./src/asset/index.html
@@ -122,26 +124,25 @@ export default function App() {
   "main": "webpack.config.js",
 ```
 
-``` JSON
-  "license": "MIT"
-}
-
 ### `package.json`にscriptsを追加する
 
+``` JSON
+  "license": "MIT",
 --------↓↓↓↓追加↓↓↓↓--------
-,"scripts": {
+  "scripts": {
     "build": "webpack --mode development",
     "start": "webpack-dev-server --open"
-  }
+  },
 --------↑↑↑↑追加↑↑↑↑--------
-
-}
+  "dependencies": {
 ```
 
-### buildしてファイルを生成する
+### buildしてファイルを生成する`
 
-buildに成功すると`./dist`に`index.html`と`index.min.js`が生成されていることを確認する
-`./dist/index.html`をブラウザで開けば「WellCome!」と表示される
+buildに成功すると`./dist`に`index.html`と`index.min.js`が生成されていることを確認する。
+`./dist/index.html`をブラウザで開けば「Well Come!」と表示されるはず。
+
+実際のサーバーなどに公開する場合は`build`で生成されたファイルを使う事になる。
 
 ```shell
 yarn build
@@ -154,3 +155,5 @@ yarn build
 ```shell
 yarn start
 ```
+
+### サーバーを起動したまま`WellCom`を変更し、即時反映することを確認してみる
