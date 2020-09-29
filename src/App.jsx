@@ -1,5 +1,6 @@
 import React from 'react';
+import Tweet from './component/Tweet';
 
 export default function App() {
-  return <h1>Well Come!</h1>;
+  return <Tweet />;
 }
