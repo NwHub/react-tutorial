@@ -2,191 +2,74 @@
 
 Reactのチュートリアル
 
-## Lesson1
+## Lesson2
 
-### Lesson1をチェックアウト
+### Lesson2をチェックアウト
 
 強制的にチェックアウト
 
 ``` shell
-git checkout -f lesson-01
+git checkout -f lesson-02
 ```
 
-### Tweet作成
+### Firebaseにアクセス（Webコンソール）
 
-./src/Tweet.jsx
+firebaseコンソールに頑張ってログイン
 
-```JSX
-import React, { useState } from 'react';
+https://console.firebase.google.com/
 
-export default function Tweet() {
-  const initialState = [
-    {
-      userName: 'user1',
-      message: 'message1',
-    },
-    {
-      userName: 'user2',
-      message: 'message2',
-    },
-    {
-      userName: 'user3',
-      message: 'message3',
-    },
-  ];
+`プロジェクト追加`をポチる
 
-  const [tweets, setTweets] = useState(initialState);
+![スクリーンショット 2020-10-03 19 42 43](https://user-images.githubusercontent.com/1374058/94990008-ceb22b80-05b3-11eb-8e41-3714c3c2ab3a.png)
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!tweet) return;
-    const name = event.target.userName.value;
-    const msg = event.target.message.value;
-    setTweets((tweets) => [
-      ...tweets,
-      {
-        userName: name,
-        message: msg,
-      },
-    ]);
-  };
+プロジェクト名を`react-tutorial`とか適当に設定する
 
-  return (
-    <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input name="userName" placeholder="ユーザー名" />
-          <textarea name="tweet" placeholder="今日の出来事" />
-          <div>
-            <button type="submit">Send</button>
-          </div>
-        </form>
-      </div>
-      <div>
-        {tweets.map((tweet, index) => (
-          <div key={index}>
-            <div>
-              <span> {tweet.userName}</span>
-            </div>
-            <h3>{tweet.message}</h3>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+![スクリーンショット 2020-10-03 19 43 43](https://user-images.githubusercontent.com/1374058/94990010-cf4ac200-05b3-11eb-8c88-17750945af33.png)
+
+`Google アナリティクス`をoffにして`プロジェクトを作成`ポチる
+
+### firebase-toolsのインストール
+
+``` shell
+yarn global add firebase-tools
 ```
 
-### サーバー起動
+### firebaseにログイン
 
-```shell
-yarn start
+Googleアカウントへのログインが要求される。
+
+``` shell
+firebase login
 ```
 
-### CSSを適応して立派にする
+### プロジェクトでfirebase初期化
 
-./src/style.css
-
-``` css
-/* input */
-.inputUserName {
-  font-size: 16pt;
-  font-weight: 200;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 90%;
-  padding: 0.5em;
-  margin: 0.5em 0.5em;
-}
-
-.message {
-  font-size: 16pt;
-  font-weight: 200;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  width: 90%;
-  height: 5em;
-  padding: 0.5em;
-  margin: 0.5em 0.5em;
-}
-
-.send {
-  font-size: 1.4em;
-  font-weight: bold;
-  padding: 10px 30px;
-  background-color: #248;
-  color: #fff;
-  border-style: none;
-  margin: 0.5em;
-}
-
-/* MessageList */
-.messageRoot {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 1em;
-  margin: 0.5em;
-}
-
-.userName {
-  color: #aaa;
-}
-
+``` shell
+firebase init
 ```
 
-./src/Tweet.jsx
+1. `Hosting: Configure and deploy Firebase Hosting sites`をスペースキーで選択する![スクリーンショット 2020-10-03 19 43 43](https://user-images.githubusercontent.com/1374058/94990010-cf4ac200-05b3-11eb-8c88-17750945af33.png)
 
-```JSX
-import React, { useState } from 'react';
-import './style.css' // 追加
+1. `Use an existing project`を選択して、firebaseコンソールで作成した`react-tutorial`を選択する。
 
-export default function Tweet() {
-・・・
-  const handleSubmit = (event) => {
-    ・・・
-  };
+1. `? What do you want to use as your public directory?`で`dist`と入力
 
-  return (
-    <div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input className="inputUserName" name="userName" placeholder="ユーザー名" />{/* 修正 */}
-          <textarea className="message" name="tweet" placeholder="今日の出来事" />{/* 修正 */}
-          <div>
-            <button className="send" type="submit">Send</button>{/* 修正 */}
-          </div>
-        </form>
-      </div>
-      <div>
-        {tweets.map((tweet, index) => (
-          <div className="messageRoot" key={index}>{/* 修正 */}
-            <div>
-              <span className="userName">{tweet.userName}</span>{/* 修正 */}
-            </div>
-            <h3>{tweet.message}</h3>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+1. `? Configure as a single-page app (rewrite all urls to /index.html)? `で`N`と入力
+
+1. `? File dist/index.html already exists. Overwrite?`で`N`と入力
+
+### ビルド
+
+``` shell
+yarn build
 ```
 
-### リロードして確認
+### デプロイ
 
-### 試しに表示を新しい順にしてみる
+表示されるURLにアクセスして表示されることを確認する。
+※変更してデプロイしても変わらない場合はブラウザのキャッシュである可能性が高いです。
+シークレットモードなどで試しましょう！
 
-./src/Tweet.jsx
-
-```JSX
-  return (
-・・・
-        {tweets.map((tweet, index) => (
-          <div className="messageRoot" key={index}>
-            <div>
-              <span className="userName">{tweet.userName}</span>
-            </div>
-            <h3>{tweet.message}</h3>
-          </div>
-        )).reverse()}{/* 修正 */}
+``` shell
+firebase deploy
 ```
