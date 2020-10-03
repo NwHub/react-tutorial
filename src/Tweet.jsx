@@ -45,7 +45,7 @@ export default function Tweet() {
 
           <textarea
             className="message"
-            name="tweet"
+            name="message"
             placeholder="今日の出来事"
           />
 
