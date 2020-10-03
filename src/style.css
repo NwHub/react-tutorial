@@ -1,0 +1,44 @@
+/* input */
+.inputUserName {
+  font-size: 16pt;
+  font-weight: 200;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 90%;
+  padding: 0.5em;
+  margin: 0.5em 0.5em;
+}
+
+.message {
+  font-size: 16pt;
+  font-weight: 200;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 90%;
+  height: 5em;
+  padding: 0.5em;
+  margin: 0.5em 0.5em;
+}
+
+.send {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 10px 30px;
+  background-color: #248;
+  color: #fff;
+  border-style: none;
+  margin: 0.5em;
+}
+
+/* MessageList */
+.messageRoot {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.userName {
+  color: #aaa;
+}
