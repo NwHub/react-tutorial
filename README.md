@@ -2,158 +2,191 @@
 
 Reactのチュートリアル
 
-## Lesson0
+## Lesson1
 
-### Visual Studio Code（VSCode）のインストール
+### Lesson1をチェックアウト
 
-[Visual Studio Code](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
-
-### パッケージマネージャーとNode.jsのインストール
-
-Macは`Homebrew`、Windowsは`Scoop`がオススメ
-
-- Mac
-  - [MacにNode.jsをインストール](https://qiita.com/kyosuke5_20/items/c5f68fc9d89b84c0df09)
-  - Macの場合はXcodeの`Command Line Tools`をインストールする必要があり、`Homebrew`入れる途中でいい感じにインストールされたが、最近できないとの報告あり。
-  - Apple Developersで直接ダウンロードする必要があるかも、[Apple Developers](https://qiita.com/mochiflappe/items/b6ecbe9d9a3a37cebbab)
-
-- Windows
-  - [windows10 scoopを使ってnode.jsをインストールする](https://mebee.info/2020/04/20/post-10056/)
-
-### gitをインストール
-
-- Mac
+強制的にチェックアウト
 
 ``` shell
-brew install git
+git checkout -f lesson-01
 ```
 
-- Windows
+### Tweet作成
 
-``` shell
-scoop install git
-```
-
-### Yarnをインストール
-
-- Mac
-
-``` shell
-brew install yarn
-```
-
-- Windows
-
-``` shell
-scoop install yarn
-```
-
-### プロジェクトをClone
-
-```shell
-git clone https://github.com/NwHub/react-tutorial.git
-cd react-tutorial
-git checkout lesson-0
-```
-
-### プロジェクトを初期化
-
-色々質問されるけれども、全部エンター
-
-```shell
-yarn init
-```
-
-### パッケージインストール
-
-```shell
-yarn add react react-dom
-yarn add -D @babel/core @babel/preset-env @babel/preset-react babel-loader css-loader html-webpack-plugin style-loader webpack webpack-cli webpack-dev-server
-```
-
-### フォルダとファイルの作成
-
-```shell
-mkdir -p src/asset
-```
-
-./src/asset/index.html
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>React Tutorials</title>
-  </head>
-
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-```
-
-./src/index.jsx
+./src/Tweet.jsx
 
 ```JSX
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React, { useState } from 'react';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-```
+export default function Tweet() {
+  const initialState = [
+    {
+      userName: 'user1',
+      message: 'message1',
+    },
+    {
+      userName: 'user2',
+      message: 'message2',
+    },
+    {
+      userName: 'user3',
+      message: 'message3',
+    },
+  ];
 
-./src/App.jsx
+  const [tweets, setTweets] = useState(initialState);
 
-```JSX
-import React from 'react';
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!tweet) return;
+    const name = event.target.userName.value;
+    const msg = event.target.message.value;
+    setTweets((tweets) => [
+      ...tweets,
+      {
+        userName: name,
+        message: msg,
+      },
+    ]);
+  };
 
-export default function App() {
-    return (<h1>Welcome!</h1>);
+  return (
+    <div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input name="userName" placeholder="ユーザー名" />
+          <textarea name="tweet" placeholder="今日の出来事" />
+          <div>
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+      <div>
+        {tweets.map((tweet, index) => (
+          <div key={index}>
+            <div>
+              <span> {tweet.userName}</span>
+            </div>
+            <h3>{tweet.message}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 ```
 
-### `package.json`のmainを`index.js`から`webpack.config.js`に変更する
-
-``` JSON
-  "main": "webpack.config.js",
-```
-
-### `package.json`にscriptsを追加する
-
-``` JSON
-  "license": "MIT",
---------↓↓↓↓追加↓↓↓↓--------
-  "scripts": {
-    "build": "webpack --mode development",
-    "start": "webpack-dev-server --open"
-  },
---------↑↑↑↑追加↑↑↑↑--------
-  "dependencies": {
-```
-
-### buildしてファイルを生成する`
-
-buildに成功すると`./dist`に`index.html`と`index.min.js`が生成されていることを確認する。
-`./dist/index.html`をブラウザで開けば「Well Come!」と表示されるはず。
-
-実際のサーバーなどに公開する場合は`build`で生成されたファイルを使う事になる。
-
-```shell
-yarn build
-```
-
-### 開発環境向けのサーバーが起動することを確認
-
-サーバー起動だと変更がリアルタイムで変更されて便利。
+### サーバー起動
 
 ```shell
 yarn start
 ```
 
-### サーバーを起動したまま`WellCom`を変更し、即時反映することを確認してみる
+### CSSを適応して立派にする
+
+./src/style.css
+
+``` css
+/* input */
+.inputUserName {
+  font-size: 16pt;
+  font-weight: 200;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 90%;
+  padding: 0.5em;
+  margin: 0.5em 0.5em;
+}
+
+.message {
+  font-size: 16pt;
+  font-weight: 200;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 90%;
+  height: 5em;
+  padding: 0.5em;
+  margin: 0.5em 0.5em;
+}
+
+.send {
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 10px 30px;
+  background-color: #248;
+  color: #fff;
+  border-style: none;
+  margin: 0.5em;
+}
+
+/* MessageList */
+.messageRoot {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.userName {
+  color: #aaa;
+}
+
+```
+
+./src/Tweet.jsx
+
+```JSX
+import React, { useState } from 'react';
+import './style.css' // 追加
+
+export default function Tweet() {
+・・・
+  const handleSubmit = (event) => {
+    ・・・
+  };
+
+  return (
+    <div>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input className="inputUserName" name="userName" placeholder="ユーザー名" />{/* 修正 */}
+          <textarea className="message" name="tweet" placeholder="今日の出来事" />{/* 修正 */}
+          <div>
+            <button className="send" type="submit">Send</button>{/* 修正 */}
+          </div>
+        </form>
+      </div>
+      <div>
+        {tweets.map((tweet, index) => (
+          <div className="messageRoot" key={index}>{/* 修正 */}
+            <div>
+              <span className="userName">{tweet.userName}</span>{/* 修正 */}
+            </div>
+            <h3>{tweet.message}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+```
+
+### リロードして確認
+
+### 試しに表示を新しい順にしてみる
+
+./src/Tweet.jsx
+
+```JSX
+  return (
+・・・
+        {tweets.map((tweet, index) => (
+          <div className="messageRoot" key={index}>
+            <div>
+              <span className="userName">{tweet.userName}</span>
+            </div>
+            <h3>{tweet.message}</h3>
+          </div>
+        )).reverse()}{/* 修正 */}
+```
