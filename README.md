@@ -56,7 +56,7 @@ export default function Tweet() {
       <div>
         <form onSubmit={handleSubmit}>
           <input name="userName" placeholder="ユーザー名" />
-          <textarea name="tweet" placeholder="今日の出来事" />
+          <textarea name="message" placeholder="今日の出来事" />
           <div>
             <button type="submit">Send</button>
           </div>
@@ -152,7 +152,7 @@ export default function Tweet() {
       <div>
         <form onSubmit={handleSubmit}>
           <input className="inputUserName" name="userName" placeholder="ユーザー名" />{/* 修正 */}
-          <textarea className="message" name="tweet" placeholder="今日の出来事" />{/* 修正 */}
+          <textarea className="message" name="message" placeholder="今日の出来事" />{/* 修正 */}
           <div>
             <button className="send" type="submit">Send</button>{/* 修正 */}
           </div>
