@@ -21,9 +21,9 @@ export default function Tweet() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!tweet) return;
     const name = event.target.userName.value;
     const msg = event.target.message.value;
+    if (!msg) return;
     setTweets((tweets) => [
       ...tweets,
       {

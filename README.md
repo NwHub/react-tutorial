@@ -48,7 +48,8 @@ firebase login
 firebase init
 ```
 
-1. `Hosting: Configure and deploy Firebase Hosting sites`をスペースキーで選択する![スクリーンショット 2020-10-03 19 31 34](https://user-images.githubusercontent.com/1374058/94990003-cc4fd180-05b3-11eb-9492-9c0e3426fa66.png)
+1. `Hosting: Configure and deploy Firebase Hosting sites`をスペースキーで選択する  
+![スクリーンショット 2020-10-03 19 31 34](https://user-images.githubusercontent.com/1374058/94990003-cc4fd180-05b3-11eb-9492-9c0e3426fa66.png)
 
 1. `Use an existing project`を選択して、firebaseコンソールで作成した`react-tutorial`を選択する。
 
