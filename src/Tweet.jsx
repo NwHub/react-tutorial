@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import firebase from 'firebase';
 import './style.css';
 
 export default function Tweet() {
-  const initialState = [
-    {
-      userName: 'user1',
-      message: 'message1',
-    },
-    {
-      userName: 'user2',
-      message: 'message2',
-    },
-    {
-      userName: 'user3',
-      message: 'message3',
-    },
-  ];
+  const [tweets, setTweets] = useState([]);
+  const db = firebase.firestore();
 
-  const [tweets, setTweets] = useState(initialState);
+  // 画面が開かれた時や値が更新されたときDBが更新された時に更新される不思議な処理
+  useEffect(() => {
+    const unsubscribe = db
+      .collection('messages')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snap) => {
+        const data = snap.docs.map((doc) => doc.data());
+        setTweets([...data]);
+      });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!tweet) return;
     const name = event.target.userName.value;
     const msg = event.target.message.value;
-    setTweets((tweets) => [
-      ...tweets,
-      {
-        userName: name,
-        message: msg,
-      },
-    ]);
+    if (!msg) return;
+
+    let docRef = db.collection('messages');
+    docRef.add({
+      userName: name,
+      message: msg,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
   };
 
   return (
@@ -45,7 +46,7 @@ export default function Tweet() {
 
           <textarea
             className="message"
-            name="tweet"
+            name="message"
             placeholder="今日の出来事"
           />
 

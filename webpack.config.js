@@ -2,6 +2,7 @@ const debug = process.env.NODE_ENV !== 'production';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
 module.exports = {
   mode: 'development',
@@ -48,5 +49,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: `${__dirname}/src/asset/index.html` }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.parsed),
+    }),
   ],
 };

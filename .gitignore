@@ -3,3 +3,4 @@
 .firebase
 yarn-error.log*
 .DS_store
+.env
