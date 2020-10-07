@@ -255,5 +255,5 @@ firebase deploy
 
 ### お疲れ様です
 
-- [<= Lesson03](https://github.com/NwHub/react-tutorial/tree/lesson-03)
+- [<= Lesson02](https://github.com/NwHub/react-tutorial/tree/lesson-02)
 - [Lesson04 =>](https://github.com/NwHub/react-tutorial/tree/lesson-04)
