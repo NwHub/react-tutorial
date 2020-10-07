@@ -114,7 +114,7 @@ ReactDOM.render(
 import React from 'react';
 
 export default function App() {
-    return (<h1>Welcome!</h1>);
+    return (<h1>Well Come!</h1>);
 }
 ```
 
@@ -156,4 +156,4 @@ yarn build
 yarn start
 ```
 
-### サーバーを起動したまま`WellCom`を変更し、即時反映することを確認してみる
+### サーバーを起動したまま`Well Come!`を変更し、即時反映することを確認してみる
