@@ -2,6 +2,10 @@
 
 Reactのチュートリアル
 
+## お願い！
+
+記述通りに動かない、やり方がわからない、疑問質問などがあればIssuesを作って貰えるとすごく嬉しい。
+
 ## 画面
 
 [https://react-tutorial-50fe1.web.app/](https://react-tutorial-50fe1.web.app/)
