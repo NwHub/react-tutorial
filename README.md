@@ -77,6 +77,19 @@ export default function Tweet() {
 }
 ```
 
+### App.jsxの修正
+
+./src/App.jsx
+
+``` JSX
+import React from 'react';
+import Tweet from './Tweet'; // 追加
+
+export default function App() {
+  return <Tweet />; // 変更
+}
+```
+
 ### サーバー起動
 
 ```shell
